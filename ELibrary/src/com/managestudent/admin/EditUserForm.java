@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.managestudent.beans.LibrarianBean;
+import com.managestudent.beans.UserBean;
 import com.managestudent.dao.LibrarianDao;
 @WebServlet("/EditLibrarianForm")
 public class EditUserForm extends HttpServlet {
@@ -36,7 +36,7 @@ public class EditUserForm extends HttpServlet {
 		String sid=request.getParameter("id");
 		int id=Integer.parseInt(sid);
 		
-		LibrarianBean bean=LibrarianDao.viewById(id);
+		UserBean bean=LibrarianDao.viewById(id);
 		
 		out.print("<form action='EditLibrarian' method='post' style='width:300px'>");
 		out.print("<div class='form-group'>");

@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.managestudent.beans.LibrarianBean;
+import com.managestudent.beans.UserBean;
 
 public class LibrarianDao {
 
-	public static int save(LibrarianBean bean){
+	public static int save(UserBean bean){
 		int status=0;
 		try{
 			Connection con=DB.getCon();
@@ -26,7 +26,7 @@ public class LibrarianDao {
 		
 		return status;
 	}
-	public static int update(LibrarianBean bean){
+	public static int update(UserBean bean){
 		int status=0;
 		try{
 			Connection con=DB.getCon();
@@ -43,14 +43,14 @@ public class LibrarianDao {
 		
 		return status;
 	}
-	public static List<LibrarianBean> view(){
-		List<LibrarianBean> list=new ArrayList<LibrarianBean>();
+	public static List<UserBean> view(){
+		List<UserBean> list=new ArrayList<UserBean>();
 		try{
 			Connection con=DB.getCon();
 			PreparedStatement ps=con.prepareStatement("select * from e_librarian");
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
-				LibrarianBean bean=new LibrarianBean();
+				UserBean bean=new UserBean();
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setEmail(rs.getString("email"));
@@ -64,8 +64,8 @@ public class LibrarianDao {
 		
 		return list;
 	}
-	public static LibrarianBean viewById(int id){
-		LibrarianBean bean=new LibrarianBean();
+	public static UserBean viewById(int id){
+		UserBean bean=new UserBean();
 		try{
 			Connection con=DB.getCon();
 			PreparedStatement ps=con.prepareStatement("select * from e_librarian where id=?");

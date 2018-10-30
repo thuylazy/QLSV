@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.managestudent.beans.LibrarianBean;
+import com.managestudent.beans.UserBean;
 import com.managestudent.dao.LibrarianDao;
 @WebServlet("/AddLibrarian")
 public class AddUser extends HttpServlet {
@@ -39,7 +39,7 @@ public class AddUser extends HttpServlet {
 		String password=request.getParameter("password");
 		String smobile=request.getParameter("mobile");
 		long mobile=Long.parseLong(smobile);
-		LibrarianBean bean=new LibrarianBean(name, email, password, mobile);
+		UserBean bean=new UserBean(name, email, password, mobile);
 		LibrarianDao.save(bean);
 		out.print("<h4>Librarian added successfully</h4>");
 		request.getRequestDispatcher("addlibrarianform.html").include(request, response);
