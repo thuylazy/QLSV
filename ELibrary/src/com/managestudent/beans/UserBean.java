@@ -1,28 +1,31 @@
 package com.managestudent.beans;
 
+
 public class UserBean {
 	private int id;
-	private String name, email, password;
+	private String name, email, password, major;
 	private long mobile;
 
 	public UserBean() {
 	}
 
-	public UserBean(int id, String name, String email, String password, long mobile) {
+	public UserBean(int id, String name, String email, String password, long mobile, String major) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.mobile = mobile;
+		this.major = major;
 	}
 
-	public UserBean(String name, String email, String password, long mobile) {
+	public UserBean(String name, String email, String password, long mobile, String major) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.mobile = mobile;
+		this.major = major;
 	}
 
 	public int getId() {
@@ -63,6 +66,14 @@ public class UserBean {
 
 	public void setMobile(long mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
 	}
 
 }

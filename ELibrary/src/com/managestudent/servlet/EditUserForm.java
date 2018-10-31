@@ -1,4 +1,4 @@
-package com.managestudent.admin;
+package com.managestudent.servlet;
 
 
 
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.managestudent.beans.UserBean;
-import com.managestudent.dao.LibrarianDao;
-@WebServlet("/EditLibrarianForm")
+import com.managestudent.dao.UserDao;
+@WebServlet("/EditUserForm")
 public class EditUserForm extends HttpServlet {
 	/**
 	 * 
@@ -36,9 +36,9 @@ public class EditUserForm extends HttpServlet {
 		String sid=request.getParameter("id");
 		int id=Integer.parseInt(sid);
 		
-		UserBean bean=LibrarianDao.viewById(id);
+		UserBean bean=UserDao.viewById(id);
 		
-		out.print("<form action='EditLibrarian' method='post' style='width:300px'>");
+		out.print("<form action='EditUser' method='post' style='width:300px'>");
 		out.print("<div class='form-group'>");
 		out.print("<input type='hidden' name='id' value='"+bean.getId()+"'/>");
 		out.print("<label for='name1'>Name</label>");

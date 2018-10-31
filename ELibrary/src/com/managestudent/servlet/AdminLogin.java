@@ -1,4 +1,4 @@
-package com.managestudent.admin;
+package com.managestudent.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,13 +34,13 @@ public class AdminLogin extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("admin","true");
 			
-			request.getRequestDispatcher("admin/navadmin.html").include(request, response);
-			request.getRequestDispatcher("admin/admincarousel.html").include(request, response);
+			request.getRequestDispatcher("navadmin.html").include(request, response);
+			request.getRequestDispatcher("admincarousel.html").include(request, response);
 			
 		}else{
 //			request.getRequestDispatcher("navhome.html").include(request, response);
 //			out.println("<div class='container'>");
-			request.getRequestDispatcher("admin/adminloginform.html").include(request, response);
+			request.getRequestDispatcher("adminloginform.html").include(request, response);
 			out.println("<h3>Username or password error</h3>");
 			out.println("</div>");
 		}

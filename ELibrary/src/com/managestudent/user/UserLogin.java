@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.managestudent.dao.LibrarianDao;
-@WebServlet("/LibrarianLogin")
+import com.managestudent.dao.UserDao;
+@WebServlet("/UserLogin")
 public class UserLogin extends HttpServlet {
 	/**
 	 * 
@@ -25,24 +25,24 @@ public class UserLogin extends HttpServlet {
 		out.print("<!DOCTYPE html>");
 		out.print("<html>");
 		out.println("<head>");
-		out.println("<title>Librarian Section</title>");
+		out.println("<title>User Section</title>");
 		out.println("<link rel='stylesheet' href='bootstrap.min.css'/>");
 		out.println("</head>");
 		out.println("<body>");
 		
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
-		if(LibrarianDao.authenticate(email, password)){
+		if(UserDao.authenticate(email, password)){
 			HttpSession session=request.getSession();
 			session.setAttribute("email",email);
 			
-			request.getRequestDispatcher("navlibrarian.html").include(request, response);
-			request.getRequestDispatcher("librariancarousel.html").include(request, response);
+			request.getRequestDispatcher("navuser.html").include(request, response);
+			request.getRequestDispatcher("usercarousel.html").include(request, response);
 			
 		}else{
 //			request.getRequestDispatcher("navhome.html").include(request, response);
 //			out.println("<div class='container'>");
-			request.getRequestDispatcher("librarianloginform.html").include(request, response);
+			request.getRequestDispatcher("userloginform.html").include(request, response);
 			out.println("<h3>Username or password error</h3>");
 			out.println("</div>");
 		}

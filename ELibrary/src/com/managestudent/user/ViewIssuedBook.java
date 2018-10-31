@@ -31,7 +31,7 @@ public class ViewIssuedBook extends HttpServlet {
 		out.println("<link rel='stylesheet' href='bootstrap.min.css'/>");
 		out.println("</head>");
 		out.println("<body>");
-		request.getRequestDispatcher("navlibrarian.html").include(request, response);
+		request.getRequestDispatcher("navuser.html").include(request, response);
 		
 		out.println("<div class='container'>");
 		

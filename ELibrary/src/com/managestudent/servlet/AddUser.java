@@ -1,4 +1,4 @@
-package com.managestudent.admin;
+package com.managestudent.servlet;
 
 
 import java.io.IOException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.managestudent.beans.UserBean;
-import com.managestudent.dao.LibrarianDao;
-@WebServlet("/AddLibrarian")
+import com.managestudent.dao.UserDao;
+@WebServlet("/AddUser")
 public class AddUser extends HttpServlet {
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class AddUser extends HttpServlet {
 		out.print("<!DOCTYPE html>");
 		out.print("<html>");
 		out.println("<head>");
-		out.println("<title>Add Librarian</title>");
+		out.println("<title>Add User</title>");
 		out.println("<link rel='stylesheet' href='bootstrap.min.css'/>");
 		out.println("</head>");
 		out.println("<body>");
@@ -39,10 +39,11 @@ public class AddUser extends HttpServlet {
 		String password=request.getParameter("password");
 		String smobile=request.getParameter("mobile");
 		long mobile=Long.parseLong(smobile);
-		UserBean bean=new UserBean(name, email, password, mobile);
-		LibrarianDao.save(bean);
-		out.print("<h4>Librarian added successfully</h4>");
-		request.getRequestDispatcher("addlibrarianform.html").include(request, response);
+		String major=request.getParameter("major");
+		UserBean bean=new UserBean(name, email, password, mobile, major);
+		UserDao.save(bean);
+		out.print("<h4>User added successfully</h4>");
+		request.getRequestDispatcher("adduserform.html").include(request, response);
 		
 		
 		out.println("</div>");

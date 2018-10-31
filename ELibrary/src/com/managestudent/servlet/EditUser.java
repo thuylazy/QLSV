@@ -1,4 +1,4 @@
-package com.managestudent.admin;
+package com.managestudent.servlet;
 
 
 import java.io.IOException;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.managestudent.beans.UserBean;
-import com.managestudent.dao.LibrarianDao;
-@WebServlet("/EditLibrarian")
+import com.managestudent.dao.UserDao;
+@WebServlet("/EditUser")
 public class EditUser extends HttpServlet {
 	/**
 	 * 
@@ -26,8 +26,8 @@ public class EditUser extends HttpServlet {
 		String smobile=request.getParameter("mobile");
 		long mobile=Long.parseLong(smobile);
 		UserBean bean=new UserBean(id,name, email, password, mobile);
-		LibrarianDao.update(bean);
-		response.sendRedirect("ViewLibrarian");
+		UserDao.update(bean);
+		response.sendRedirect("ViewUser");
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/LogoutLibrarian")
+@WebServlet("/LogoutUser")
 public class LogoutUser extends HttpServlet {
 	/**
 	 * 

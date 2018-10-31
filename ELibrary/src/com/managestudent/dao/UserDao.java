@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.managestudent.beans.UserBean;
 
-public class LibrarianDao {
+public class UserDao {
 
 	public static int save(UserBean bean){
 		int status=0;

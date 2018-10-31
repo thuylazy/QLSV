@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Student Management System || Login</title>
+<title>Student Management System </title>
 <link rel="stylesheet" href="bootstrap.min.css" />
 </head>
 <body>
@@ -25,8 +25,8 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="admin/adminloginform.html">Admin</a></li>
-					<li><a href="user/userloginform.html">User</a></li>
+					<li><a href="adminloginform.html">Admin</a></li>
+					<li><a href="userloginform.html">User</a></li>
 				</ul>
 
 			</div>
@@ -42,20 +42,19 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3>Admin Login</h3>
-				<form action="AdminLogin" method="post" style="width: 300px">
+				<h3>User Login</h3>
+				<form action="UserLogin" method="post" style="width: 300px">
 					<div class="form-group">
 						<label for="email1">Email address</label> <input type="email"
-							class="form-control" name="email" id="email1" placeholder="Email" />
+							class="form-control" id="email1" name="email" placeholder="Email" />
 					</div>
 					<div class="form-group">
 						<label for="password1">Password</label> <input type="password"
-							class="form-control" name="password" id="password1"
+							class="form-control" id="password1" name="password"
 							placeholder="Password" />
 					</div>
 					<button type="submit" class="btn btn-primary">Login</button>
 				</form>
-
 			</div>
 		</div>
 	</div>
