@@ -15,12 +15,13 @@ public class InforDao {
 		try{
 			Connection con=DB.getCon();
 			PreparedStatement ps=con.prepareStatement("insert into e_book values(?,?,?,?,?,?)");
-			ps.setString(1,bean.getCallno());
-			ps.setString(2,bean.getName());
-			ps.setString(3,bean.getAuthor());
-			ps.setString(4,bean.getPublisher());
-			ps.setInt(5,bean.getQuantity());
-			ps.setInt(6,0);
+//			ps.setString(1,bean.getCallno());
+//			ps.setString(2,bean.getName());
+//			ps.setString(3,bean.getAuthor());
+//			ps.setString(4,bean.getPublisher());
+//			ps.setInt(5,bean.getQuantity());
+			ps.setDate(1, bean.getBday());
+			ps.setInt(2,0);
 			status=ps.executeUpdate();
 			con.close();
 			
@@ -36,12 +37,12 @@ public class InforDao {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				InforBean bean=new InforBean();
-				bean.setCallno(rs.getString("callno"));
-				bean.setName(rs.getString("name"));
-				bean.setAuthor(rs.getString("author"));
-				bean.setPublisher(rs.getString("publisher"));
-				bean.setQuantity(rs.getInt("quantity"));
-				bean.setIssued(rs.getInt("issued"));
+//				bean.setCallno(rs.getString("callno"));
+//				bean.setName(rs.getString("name"));
+//				bean.setAuthor(rs.getString("author"));
+//				bean.setPublisher(rs.getString("publisher"));
+//				bean.setQuantity(rs.getInt("quantity"));
+//				bean.setIssued(rs.getInt("issued"));
 				
 				list.add(bean);
 			}

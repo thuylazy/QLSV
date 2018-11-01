@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.managestudent.beans.InforBean;
 import com.managestudent.dao.InforDao;
 
-@WebServlet("/ViewBook")
+@WebServlet("/ViewInfor")
 public class ViewInfor extends HttpServlet {
 	/**
 	 * 
@@ -40,12 +40,10 @@ public class ViewInfor extends HttpServlet {
 
 		out.println("<table class='table table-bordered table-striped'>");
 		out.println(
-				"<tr><th>Callno</th><th>Name</th><th>Author</th><th>Publisher</th><th>Quantity</th><th>Issued</th><th>Delete</th></tr>");
+				"<tr><th>Name</th><th>Birthday</th><th>Gender</th><th>Address</th></tr>");
 		for (InforBean bean : list) {
-			out.println("<tr><td>" + bean.getCallno() + "</td><td>" + bean.getName() + "</td><td>" + bean.getAuthor()
-					+ "</td><td>" + bean.getPublisher() + "</td><td>" + bean.getQuantity() + "</td><td>"
-					+ bean.getIssued() + "</td><td><a href='DeleteBook?callno=" + bean.getCallno()
-					+ "'>Delete</a></td></tr>");
+			out.println("<tr><td><a href = ''</td><td>" + bean.getBday()
+					+ "</td><td>" + bean.getGender() + "</td><td>" + bean.getAddr() + "</td></tr>");
 		}
 		out.println("</table>");
 

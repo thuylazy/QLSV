@@ -2,6 +2,8 @@ package com.managestudent.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,13 +34,20 @@ public class AddInfor extends HttpServlet {
 		request.getRequestDispatcher("navuser.html").include(request, response);
 		
 		out.println("<div class='container'>");
-		String callno=request.getParameter("callno");
-		String name=request.getParameter("name");
-		String author=request.getParameter("author");
+		String gender = request.getParameter("gender");
+		String addr = request.getParameter("addr");
+		String bday1 = request.getParameter("bday1");
+		try {
+			java.util.Date bday = new SimpleDateFormat("yyyy-MM-dd").parse(bday1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		InforBean bean=new InforBean();
 		int i = InforDao.save(bean);
 		if(i>0){
-			out.println("<h3></h3>");
+			out.println("<h3>Add information successfully</h3>");
 		}
 		request.getRequestDispatcher("addinforform.html").include(request, response);
 		out.println("</div>");
