@@ -32,21 +32,21 @@ public class UserLogin extends HttpServlet {
 		
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
-		if(UserDao.authenticate(email, password)){
-			HttpSession session=request.getSession();
-			session.setAttribute("email",email);
-			
-			request.getRequestDispatcher("navuser.html").include(request, response);
-			request.getRequestDispatcher("usercarousel.html").include(request, response);
-			
-		}else{
-//			request.getRequestDispatcher("navhome.html").include(request, response);
-//			out.println("<div class='container'>");
-			request.getRequestDispatcher("userloginform.html").include(request, response);
-			out.println("<h3>Username or password error</h3>");
-			out.println("</div>");
-		}
-		
+//		if(UserDao.authenticate(email, password)){
+//			HttpSession session=request.getSession();
+//			session.setAttribute("email",email);
+//			
+//			request.getRequestDispatcher("navuser.html").include(request, response);
+//			request.getRequestDispatcher("usercarousel.html").include(request, response);
+//			
+//		}else{
+////			request.getRequestDispatcher("navhome.html").include(request, response);
+////			out.println("<div class='container'>");
+//			request.getRequestDispatcher("userloginform.html").include(request, response);
+//			out.println("<h3>Username or password error</h3>");
+//			out.println("</div>");
+//		}
+//		
 		
 		request.getRequestDispatcher("footer.html").include(request, response);
 		out.close();

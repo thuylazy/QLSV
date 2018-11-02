@@ -41,7 +41,7 @@ public class AddUser extends HttpServlet {
 		long mobile=Long.parseLong(smobile);
 		String major=request.getParameter("major");
 		UserBean bean=new UserBean(name, email, password, mobile, major);
-		UserDao.save(bean);
+//		UserDao.save(bean);
 		out.print("<h4>User added successfully</h4>");
 		request.getRequestDispatcher("adduserform.html").include(request, response);
 		

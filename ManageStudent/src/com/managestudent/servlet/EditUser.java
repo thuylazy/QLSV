@@ -27,7 +27,7 @@ public class EditUser extends HttpServlet {
 		long mobile=Long.parseLong(smobile);
 		String major = request.getParameter("major");
 		UserBean bean=new UserBean(id,name, email, password, mobile, major);
-		UserDao.update(bean);
+//		UserDao.update(bean);
 		response.sendRedirect("ViewUser");
 	}
 

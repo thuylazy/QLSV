@@ -19,7 +19,7 @@ public class DeleteUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sid=request.getParameter("id");
 		int id=Integer.parseInt(sid);
-		UserDao.delete(id);
+//		UserDao.delete(id);
 		response.sendRedirect("ViewUser");
 	}
 }
