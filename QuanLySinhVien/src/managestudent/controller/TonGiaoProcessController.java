@@ -1,95 +1,61 @@
-package com.managestudent.servlet;
-
+package managestudent.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.managestudent.beans.UserBean;
-import com.managestudent.dao.UserDao;
-
-import managestudent.entities.ChuyenNganh;
-import managestudent.entities.Nganh;
-import managestudent.logics.impl.ChuyenNganhLogicsImpl;
-import managestudent.logics.impl.NganhLogicsImpl;
+import managestudent.entities.TonGiao;
+import managestudent.logics.impl.TonGIaoLogicsImpl;
 import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
 import managestudent.validates.ValidateInfor;
-@WebServlet("/AddUser")
-public class AddUser extends HttpServlet {
-	/**
-	 * 
-	 */
+
+/**
+ * Servlet implementation class TonGiaoProcessController
+ */
+public class TonGiaoProcessController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
-//		PrintWriter out=response.getWriter();
-//		
-//		out.print("<!DOCTYPE html>");
-//		out.print("<html>");
-//		out.println("<head>");
-//		out.println("<title>Add User</title>");
-//		out.println("<link rel='stylesheet' href='bootstrap.min.css'/>");
-//		out.println("</head>");
-//		out.println("<body>");
-//		
-//		request.getRequestDispatcher("navadmin.html").include(request, response);
-//		out.println("<div class='container'>");
-//		
-//		String name=request.getParameter("name");
-//		String email=request.getParameter("email");
-//		String password=request.getParameter("password");
-//		String smobile=request.getParameter("mobile");
-//		long mobile=Long.parseLong(smobile);
-//		String major=request.getParameter("major");
-//		UserBean bean=new UserBean(name, email, password, mobile, major);
-////		UserDao.save(bean);
-//		out.print("<h4>User added successfully</h4>");
-//		request.getRequestDispatcher("adduserform.html").include(request, response);
-//		
-//		
-//		out.println("</div>");
-//		request.getRequestDispatcher("footer.html").include(request, response);
-//		out.close();
-//	}
-	
-	public AddUser() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public TonGiaoProcessController() {
         super();
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String template = "";
 		List<String> lsMessage = new ArrayList<String>();
-		loadData(request, response);
 
 		if(Common.checkLogin(request.getSession())) {
 			template = Constant.SYSTEM_ERR;
-			if(request.getSession().getAttribute("chuyennganh") != null) {
-				request.setAttribute("chuyennganh", request.getSession().getAttribute("chuyennganh"));
-				template = Constant.CHUYENNGANHPROCESS;
+			if(request.getSession().getAttribute("tongiao") != null) {
+				request.setAttribute("tongiao", request.getSession().getAttribute("tongiao"));
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("lsMessage") != null) {
 				lsMessage.add(request.getParameter("lsMessage"));
-				template = Constant.CHUYENNGANHPROCESS;
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("ref") != null) {
 				request.setAttribute("ref", request.getParameter("ref"));
-				template = Constant.CHUYENNGANHPROCESS;
+				template = Constant.TONGIAOPROCESS;
 			}
 			if(request.getParameter("id") != null) {
 				request.setAttribute("id", request.getParameter("id"));
-				template = Constant.CHUYENNGANHPROCESS;
+				template = Constant.TONGIAOPROCESS;
 			}
+
 		} else {
 			template = Constant.LOGIN;
 			lsMessage.add(MessageErrorProperties.getMessage("error_023"));
@@ -100,51 +66,53 @@ public class AddUser extends HttpServlet {
 		req.forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String template = "";
 		List<String> lsMessage = new ArrayList<String>();
-		loadData(request, response);
 
 		if(Common.checkLogin(request.getSession())) {
 			if(request.getParameter("submit") != null) {
-				ChuyenNganh cn = setDefaultData(request, response);
+				TonGiao tonGiao = setDefaultData(request, response);
 
 				if(request.getAttribute("lsMessage") != null) {
-					request.setAttribute("chuyennganh", cn);
-					RequestDispatcher req = request.getRequestDispatcher(Constant.CHUYENNGANHPROCESS);
+					request.setAttribute("tongiao", tonGiao);
+					RequestDispatcher req = request.getRequestDispatcher(Constant.TONGIAOPROCESS);
 					req.forward(request, response);
 					return;
 				}
 
 				if (request.getParameter("ref") != null) {
 					if("add".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateChuyenNganhInfor(cn, true);
+						lsMessage = ValidateInfor.validateTonGiaoInfor(tonGiao, true);
 					} else if("update".equals(request.getParameter("ref"))) {
-						lsMessage = ValidateInfor.validateChuyenNganhInfor(cn, false);
+						lsMessage = ValidateInfor.validateTonGiaoInfor(tonGiao, false);
 					}
 				}
 
 				if (lsMessage.size() > 0) {
 					request.setAttribute("lsMessage", lsMessage);
-					request.setAttribute("chuyennganh", cn);
+					request.setAttribute("tongiao", tonGiao);
 					if (request.getParameter("ref") != null) {
 						request.setAttribute("ref", request.getParameter("ref"));
 					}
 					if(request.getParameter("id") != null) {
 						request.setAttribute("id", request.getParameter("id"));
 					}
-					template = Constant.CHUYENNGANHPROCESS;
+					template = Constant.TONGIAOPROCESS;
 				} else {
-					request.getSession().setAttribute("chuyennganh", cn);
+					request.getSession().setAttribute("tongiao", tonGiao);
 					if (request.getParameter("ref") != null) {
 						String ref = request.getParameter("ref");
 
 						if ("add".equals(ref)) {
-							boolean rs = processData(-1, cn, true);
+							boolean rs = processData(-1, tonGiao, true);
 
 							if (rs) {
 								//lsMessage.add(MessageProperties.getMessage("msg_001"));
-								request.getSession().removeAttribute("chuyennganh");
+								request.getSession().removeAttribute("tongiao");
 								response.sendRedirect("Result.do?add=success");
 								return;
 							} else {
@@ -153,11 +121,11 @@ public class AddUser extends HttpServlet {
 						} else if ("update".equals(ref)) {
 							if (request.getParameter("id") != null) {
 								try {
-									ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
-									ChuyenNganh cnTemp = chuyenNganhLogics.getChuyenNganhById(Integer.parseInt(request.getParameter("id")));
+									TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
+									TonGiao tonGiaoTemp = tonGiaoLogics.getTonGiaoById(Integer.parseInt(request.getParameter("id")));
 
-									if(cnTemp != null) {
-										boolean rs = processData(Integer.parseInt(request.getParameter("id")), cn, false);
+									if(tonGiaoTemp != null) {
+										boolean rs = processData(Integer.parseInt(request.getParameter("id")), tonGiao, false);
 
 										if (rs) {
 											//lsMessage.add(MessageProperties.getMessage("msg_002"));
@@ -172,7 +140,7 @@ public class AddUser extends HttpServlet {
 								} catch (NumberFormatException e) {
 									System.out.println("An error occur: " + e.getMessage());
 									lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-									template = Constant.CHUYENNGANHPROCESS;
+									template = Constant.TONGIAOPROCESS;
 								}
 							} else {
 								template = Constant.SYSTEM_ERR;
@@ -180,11 +148,11 @@ public class AddUser extends HttpServlet {
 						} else if("delete".equals(ref)) {
 							try {
 								if(request.getParameter("id") != null) {
-									ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
-									ChuyenNganh cnTemp = chuyenNganhLogics.getChuyenNganhById(Integer.parseInt(request.getParameter("id")));
+									TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
+									TonGiao tonGiaoTemp = tonGiaoLogics.getTonGiaoById(Integer.parseInt(request.getParameter("id")));
 
-									if(cnTemp != null) {
-										boolean rs = chuyenNganhLogics.deleteChuyenNganhById(cnTemp.getChuyenNganhId());
+									if(tonGiaoTemp != null) {
+										boolean rs = tonGiaoLogics.deleteTonGiaoById(tonGiaoTemp.getTonGiaoId());
 
 										if(rs) {
 											response.sendRedirect("Result.do?delete=success");
@@ -201,7 +169,7 @@ public class AddUser extends HttpServlet {
 							} catch (NumberFormatException e) {
 								System.out.println("An error occur: " + e.getMessage());
 								lsMessage.add(MessageErrorProperties.getMessage("error_024"));
-								template = Constant.CHUYENNGANHPROCESS;
+								template = Constant.TONGIAOPROCESS;
 							}
 						} else {
 							template = Constant.SYSTEM_ERR;
@@ -224,22 +192,23 @@ public class AddUser extends HttpServlet {
 		req.forward(request, response);
 	}
 
-	protected ChuyenNganh setDefaultData(HttpServletRequest request, HttpServletResponse response) {
-		ChuyenNganh cn = new ChuyenNganh();
+	/**
+	 * Gán dữ liệu vào đối tượng tôn giáo
+	 *
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return TonGiao đối tượng tôn giáo
+	 */
+	protected TonGiao setDefaultData(HttpServletRequest request, HttpServletResponse response) {
+		TonGiao tonGiao = new TonGiao();
 		List<String> lsMessage = new ArrayList<String>();
 
 		try {
-			if(request.getParameter("machuyennganh") != null) {
-				cn.setMaChuyenNganh(request.getParameter("machuyennganh"));
+			if(request.getParameter("id") != null && request.getParameter("id").length() > 0) {
+				tonGiao.setTonGiaoId(Integer.parseInt(request.getParameter("id")));
 			}
-			if(request.getParameter("tenchuyennganh") != null) {
-				cn.setTenChuyenNganh(request.getParameter("tenchuyennganh"));
-			}
-			if(request.getParameter("id") != null) {
-				cn.setNganhId(Integer.parseInt(request.getParameter("id")));
-			}
-			if(request.getParameter("nganhid") != null) {
-				cn.setNganhId(Integer.parseInt(request.getParameter("nganhid")));
+			if(request.getParameter("tentongiao") != null && request.getParameter("tentongiao").length() > 0) {
+				tonGiao.setTenTonGiao(request.getParameter("tentongiao"));
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("An error occur: " + e.getMessage());
@@ -247,26 +216,25 @@ public class AddUser extends HttpServlet {
 			request.setAttribute("lsMessage", lsMessage);
 		}
 
-		return cn;
+		return tonGiao;
 	}
 
-	protected void loadData(HttpServletRequest request, HttpServletResponse response) {
-		NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
-
-		request.setAttribute("lsNganh", nganhLogics.getAllNganh(new Nganh(), 0, nganhLogics.getTotalRecords(new Nganh()), 1, "ASC"));
-	}
-
-	protected boolean processData(int chuyenNganhId, ChuyenNganh cn, boolean isAdd) {
+	/**
+	 * Xử lý dữ liệu vào tầng logics
+	 *
+	 * @param isAdd true: action add / false: action update
+	 * @return true: thành công / false: thất bại
+	 */
+	protected boolean processData(int tonGiaoId, TonGiao tonGiao, boolean isAdd) {
 		boolean rs = false;
+		TonGIaoLogicsImpl tonGiaoLogics = new TonGIaoLogicsImpl();
 
-		ChuyenNganhLogicsImpl chuyenNganhLogics = new ChuyenNganhLogicsImpl();
 		if(isAdd) {
-			rs = chuyenNganhLogics.addChuyenNganh(cn);
+			rs = tonGiaoLogics.addTonGiao(tonGiao);
 		} else {
-			rs = chuyenNganhLogics.updateChuyenNganhById(chuyenNganhId, cn);
+			rs = tonGiaoLogics.updateTonGiaoById(tonGiaoId, tonGiao);
 		}
 
 		return rs;
 	}
-
 }

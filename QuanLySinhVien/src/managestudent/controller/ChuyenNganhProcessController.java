@@ -1,20 +1,14 @@
-package com.managestudent.servlet;
-
+package managestudent.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.managestudent.beans.UserBean;
-import com.managestudent.dao.UserDao;
 
 import managestudent.entities.ChuyenNganh;
 import managestudent.entities.Nganh;
@@ -24,49 +18,23 @@ import managestudent.utils.Common;
 import managestudent.utils.Constant;
 import managestudent.utils.MessageErrorProperties;
 import managestudent.validates.ValidateInfor;
-@WebServlet("/AddUser")
-public class AddUser extends HttpServlet {
-	/**
-	 * 
-	 */
+
+/**
+ * Servlet implementation class ChuyenNganhProcessController
+ */
+public class ChuyenNganhProcessController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
-//		PrintWriter out=response.getWriter();
-//		
-//		out.print("<!DOCTYPE html>");
-//		out.print("<html>");
-//		out.println("<head>");
-//		out.println("<title>Add User</title>");
-//		out.println("<link rel='stylesheet' href='bootstrap.min.css'/>");
-//		out.println("</head>");
-//		out.println("<body>");
-//		
-//		request.getRequestDispatcher("navadmin.html").include(request, response);
-//		out.println("<div class='container'>");
-//		
-//		String name=request.getParameter("name");
-//		String email=request.getParameter("email");
-//		String password=request.getParameter("password");
-//		String smobile=request.getParameter("mobile");
-//		long mobile=Long.parseLong(smobile);
-//		String major=request.getParameter("major");
-//		UserBean bean=new UserBean(name, email, password, mobile, major);
-////		UserDao.save(bean);
-//		out.print("<h4>User added successfully</h4>");
-//		request.getRequestDispatcher("adduserform.html").include(request, response);
-//		
-//		
-//		out.println("</div>");
-//		request.getRequestDispatcher("footer.html").include(request, response);
-//		out.close();
-//	}
-	
-	public AddUser() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ChuyenNganhProcessController() {
         super();
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String template = "";
 		List<String> lsMessage = new ArrayList<String>();
@@ -100,6 +68,9 @@ public class AddUser extends HttpServlet {
 		req.forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String template = "";
 		List<String> lsMessage = new ArrayList<String>();
@@ -224,6 +195,13 @@ public class AddUser extends HttpServlet {
 		req.forward(request, response);
 	}
 
+	/**
+	 * Gán dữ liệu vào đối tượng chuyên ngành
+	 *
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @return ChuyenNganh đối tượng chuyên ngành
+	 */
 	protected ChuyenNganh setDefaultData(HttpServletRequest request, HttpServletResponse response) {
 		ChuyenNganh cn = new ChuyenNganh();
 		List<String> lsMessage = new ArrayList<String>();
@@ -250,12 +228,24 @@ public class AddUser extends HttpServlet {
 		return cn;
 	}
 
+	/**
+	 * Gán dữ liệu cho các control
+	 *
+	 * @param request
+	 * @param response
+	 */
 	protected void loadData(HttpServletRequest request, HttpServletResponse response) {
 		NganhLogicsImpl nganhLogics = new NganhLogicsImpl();
 
 		request.setAttribute("lsNganh", nganhLogics.getAllNganh(new Nganh(), 0, nganhLogics.getTotalRecords(new Nganh()), 1, "ASC"));
 	}
 
+	/**
+	 * Xử lý dữ liệu vào tầng logics
+	 *
+	 * @param isAdd true: action add / false: action update
+	 * @return true: thành công / false: thất bại
+	 */
 	protected boolean processData(int chuyenNganhId, ChuyenNganh cn, boolean isAdd) {
 		boolean rs = false;
 
@@ -268,5 +258,4 @@ public class AddUser extends HttpServlet {
 
 		return rs;
 	}
-
 }
