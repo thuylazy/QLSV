@@ -33,7 +33,7 @@
 </header>
 <section class="user">
 	<div class="profile-img">
-		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+		<p> Welcome back <c:out value="${loginId}" /></p>
 	</div>
 	<div class="buttons">
 		<span class="button">Help</span>
@@ -208,33 +208,8 @@
 					</select>
 				</td>
 			</tr>
+
 			<!--<tr>
-				<td>
-					Quốc tịch
-				</td>
-				<td>
-					<select name="quoctich">
-						<option value="-1">
-							Chọn quốc tịch
-						</option>
-						<c:forEach items="${lsQuocTich}" var="quocTich">
-							<c:choose>
-								<c:when test="${quocTich.quocTichId == quoctichid}">
-									<option value="${quocTich.quocTichId}" SELECTED>
-										<c:out value="${quocTich.tenQuocTich}" />
-									</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${quocTich.quocTichId}">
-										<c:out value="${quocTich.tenQuocTich}" />
-									</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			--><!--<tr>
 				<td>
 					Họ tên bố
 				</td>
@@ -268,28 +243,7 @@
 			</tr>
 			-->
 			<tr>
-				<td>
-					Hệ đào tạo
-					<select name="hedaotao">
-						<option value="-1">
-							Chọn hệ đào tạo
-						</option>
-						<c:forEach items="${lsHdt}" var="heDaoTao">
-							<c:choose>
-								<c:when test="${heDaoTao.heDtId == hedaotaoid}">
-									<option value="${heDaoTao.heDtId}" SELECTED>
-										<c:out value="${heDaoTao.tenHeDt}" />
-									</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${heDaoTao.heDtId}">
-										<c:out value="${heDaoTao.tenHeDt}" />
-									</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</select>
-				</td>
+
 				<td>
 					Tên lớp học
 					<select name="lophoc">
@@ -421,9 +375,6 @@
 					GIỚI TÍNH
 				</th>
 				<th class="header">
-					HỆ ĐÀO TẠO
-				</th>
-				<th class="header">
 					LỚP
 				</th>
 				<th class="header">
@@ -453,13 +404,6 @@
 								Nữ
 							</c:otherwise>
 						</c:choose>
-					</td>
-					<td>
-						<c:forEach items="${lsHdt}" var="hdt">
-							<c:if test="${sinhVien.heDtId == hdt.heDtId}">
-								<c:out value="${hdt.tenHeDt}" />
-							</c:if>
-						</c:forEach>
 					</td>
 					<td>
 						<c:forEach items="${lsLop}" var="lop">

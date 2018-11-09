@@ -25,7 +25,7 @@
 </header>
 <section class="user">
 	<div class="profile-img">
-		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+		<p> Welcome back <c:out value="${loginId}" /></p>
 	</div>
 	<div class="buttons">
 		<span class="button">Help</span>

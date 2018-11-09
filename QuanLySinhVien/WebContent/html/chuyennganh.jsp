@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" prefix = "c"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,7 +24,7 @@
 </header>
 <section class="user">
 	<div class="profile-img">
-		<p><img src="./images/uiface2.png" alt="" height="40" width="40" /> Welcome back <c:out value="${loginId}" /></p>
+		<p> Welcome back <c:out value="${loginId}" /></p>
 	</div>
 	<div class="buttons">
 		<span class="button">Help</span>

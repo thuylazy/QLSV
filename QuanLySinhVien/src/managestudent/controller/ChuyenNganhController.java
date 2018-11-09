@@ -1,9 +1,4 @@
-/**
- * Copyright(C) K16SE 2014
- *
- * ChuyenNganhController.java, Aug 26, 2014 HaVH
- *
- */
+
 package managestudent.controller;
 
 import java.io.IOException;
